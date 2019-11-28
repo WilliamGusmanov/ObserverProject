@@ -1,5 +1,5 @@
 package observer;
-//CHANGES 5:04 PM WG
+//CHANGES 5:10 PM WG
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Observable;
