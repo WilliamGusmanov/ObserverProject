@@ -7,20 +7,17 @@
  * @author Bryan Vu,William Gusmanov, Keval Varia
  */
 
-package cecs277OberserverDemo;
-
+package com.company;
 
 public class Bid {
-    /**
-     * a reference to the current stock at bid
-     */
+    /** a reference to the current stock at bid */
     private Stock stockInstance;
+    /** Number of shares of this particular stock*/
     private int sharesAmount;
+    /** Transaction type: Buy or Sell*/
     private TransactionType tType;
 
-    /**
-     * Aggregation: The two transaction types: BUY & SELL
-     */
+
     /**
      * default constructor
      */
@@ -30,8 +27,9 @@ public class Bid {
         sharesAmount = 0;
     }//end default constructor
 
+
     /**
-     * constructor
+     * Overloaded constructor
      * @param stockInstance type of stock
      * @param tType type of transaction
 	 * @param amountOfShares amount of stock shares 
@@ -42,6 +40,11 @@ public class Bid {
         this.tType = tType;
     }//end overloaded constructor
 
+
+    /**
+     * Product of number of share and price per share. This gives us the whole trade price.
+     * @return whole trade value for this stock instance
+     */
     public double getTradePrice() {
         return (sharesAmount * stockInstance.getPricePerStock());
     }//end getTradePrice
@@ -49,7 +52,7 @@ public class Bid {
 
     /**
      * - - - - change contents as per instruction - - - -
-     * @return
+     * @return String of details about this bid
      */
     @Override
     public String toString() {
@@ -66,5 +69,5 @@ public class Bid {
                 stockInstance + " " +
                 type + sharesAmount +
                 " shares for the amount: $" + getTradePrice();
-    }//ense toString
+    }//end toString
 }//end class 

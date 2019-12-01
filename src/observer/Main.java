@@ -3,10 +3,12 @@
  * @author Bryan Vu,William Gusmanov, Keval Varia
  */
 
-package cecs277OberserverDemo;
+package com.company;
 
 public class Main {
     public static void main(String[] args) {
+
+      //Variable declaration and initiazlization
       Stock ORCL = new Stock("ORCL", 171.05);
       Stock BA = new Stock("BA",5);
       Stock TRKX = new Stock("TRKX", 6.812);
@@ -14,6 +16,8 @@ public class Main {
       Agent Robert = new Agent("Robert Mitchner");
       Agent Noah = new Agent("Noa ben Shea");
       Agent Richard = new Agent("Robert Rohr");
+
+      //Register the Agents to Stock (Oracle, BA, or TRKX) and perform trades.
       ORCL.registerObserver(Tom);
       ORCL.registerObserver(Robert);
       ORCL.registerObserver(Noah);

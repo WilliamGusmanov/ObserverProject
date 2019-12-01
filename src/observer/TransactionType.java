@@ -3,7 +3,8 @@
  * @author Bryan Vu,William Gusmanov, Keval Varia
  */
 
-package cecs277OberserverDemo;
+package com.company;
+
 
 public enum TransactionType {
     BUY,SELL;

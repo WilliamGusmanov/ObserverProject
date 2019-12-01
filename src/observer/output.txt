@@ -1,0 +1,11 @@
+"C:\Program Files\Java\jdk-11.0.3\bin\java.exe" "-javaagent:D:\Keval\Software\IntelliJ IDEA\IntelliJ IDEA 2019.2.2\lib\idea_rt.jar=6999:D:\Keval\Software\IntelliJ IDEA\IntelliJ IDEA 2019.2.2\bin" -Dfile.encoding=UTF-8 -classpath D:\Keval\Documents\IdeaProjects\ObserverHW\out\production\ObserverHW com.company.Main
+Agent - name: Tom Clancey alerted to Bid- Symbol: ORCL Buying 20 shares for the amount: $3421.0
+Agent - name: Robert Mitchner alerted to Bid- Symbol: ORCL Buying 20 shares for the amount: $3421.0
+Agent - name: Noa ben Shea alerted to Bid- Symbol: ORCL Buying 20 shares for the amount: $3421.0
+Agent - name: Robert Rohr alerted to Bid- Symbol: ORCL Buying 20 shares for the amount: $3421.0
+Agent - name: Tom Clancey alerted to Bid- Symbol: BA Selling 10 shares for the amount: $50.0
+Agent - name: Robert Mitchner alerted to Bid- Symbol: BA Selling 10 shares for the amount: $50.0
+Agent - name: Robert Mitchner alerted to Bid- Symbol: TRKX Buying 30 shares for the amount: $204.36
+Agent - name: Noa ben Shea alerted to Bid- Symbol: TRKX Buying 30 shares for the amount: $204.36
+
+Process finished with exit code 0
