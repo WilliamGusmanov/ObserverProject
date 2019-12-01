@@ -1,29 +1,23 @@
-package com.company;
+/**
+ * Stock implements Subject
+ * @author Bryan Vu,William Gusmanov, Keval Varia
+ */
+
+package cecs277OberserverDemo;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Observable;
 
-//agents buy and sell stock
-//might need an agent class
-//colleagues
-//when a stock is bought/sold, all observers are notified
-//
-//implements Subject Observer
-//Only one stock at a time. it's static in this sort of way.
 public class Stock implements Subject {
 
     /** every stock has a symbol */
     String symbol;
 
-    /** Bid for the stock */
-    private Bid latestBid;
 
     /** Amount per stock used to calculate total amount*/
     private double pricePerStock;
 
     /** list of subscribers to alert for all changes */
-    ArrayList<Agent> subscribers;
+    ArrayList<Observer> subscribers;
 
 
     /**
@@ -32,61 +26,45 @@ public class Stock implements Subject {
     Stock(){
         symbol = "N/A";
         //listOfBids = new ArrayList(); //initialize list w/ constructor
-        latestBid = null;
         pricePerStock = 0.0;
-        subscribers = new ArrayList();
-    }
+        subscribers = new ArrayList<>();
+    }//end default constructor
 
-    Stock(String symbol, double pricePerStock, ArrayList<Agent> subscribers){
+    Stock(String symbol, double pricePerStock){
         this.symbol = symbol;
         this.pricePerStock = pricePerStock;
-        this.subscribers = subscribers;
-    }
+        subscribers = new ArrayList<>();
+    }//end overloaded constructor
 
     public double getPricePerStock() {
         return pricePerStock;
-    }
+    }//end getPricePerStock
+    
     /**
      * alert all subscribers
      */
-    public void alert() {
-        for (Agent subscriber : subscribers) {
-            subscriber.update(this);
-        }
-    }
-
-    /**
-     * returns a copy of the Bid
-     * @return
-     */
-    public Bid getBid(){
-        /*
-        return new Bid(latestBid) //COPY ?
-         */
-        return latestBid;
-    }
+    public String notifyObserver(Bid bidInstance) {
+    	String alertMessage = "";
+        for (Observer subscriber : subscribers) {
+            alertMessage = alertMessage.concat("Agent - name: " +subscriber.getName() + " " +subscriber.update(bidInstance) + "\n");
+        }//end for loop
+        return alertMessage;
+    }//end alert
 
 
     @Override
     public void registerObserver(Observer o) {
-
-    }
+    	subscribers.add(o);
+    }//end registerObserver
 
     @Override
     public void removeObserver(Observer o) {
-
-    }
-
-    @Override
-    public void notifyObserver() {
-
-    }
-
+    	subscribers.remove(o);
+    }//end removeObserver
 
     //return stock name, #of shares, #dollar amount for trade
     @Override
     public String toString() {
         return "Symbol: " + symbol;
-    }
-
-}
+    }//end toString
+}//end class

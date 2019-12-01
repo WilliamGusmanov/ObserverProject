@@ -1,7 +1,12 @@
-package com.company;
+/**
+ * Subject interface
+ * @author Bryan Vu,William Gusmanov, Keval Varia
+ */
+
+package cecs277OberserverDemo;
 
 public interface Subject {
     void registerObserver(Observer o);
     void removeObserver(Observer o);
-    void notifyObserver();
+    String notifyObserver(Bid bidInstance);
 }

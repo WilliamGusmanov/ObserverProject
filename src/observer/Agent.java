@@ -1,71 +1,62 @@
-package com.company;
+/**
+ * Agent implements Observer
+ * @author Bryan Vu,William Gusmanov, Keval Varia
+ */
 
-//CHANGES 5:10 PM WG
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Observable;
+package cecs277OberserverDemo;
+
 
 public class Agent implements Observer{
+	/**
+	 * the name of the agent
+	 */
     private String nameOfAgent;
-    private Stock currentAlert;
+    /**
+     * the latest bid made by that agent
+     */
     private Bid latestBid;
 
-    private ArrayList<Stock> stockSubscription;
-//name
     /**
      * default constructor
      */
     Agent(){
         this.nameOfAgent = "N/A";
-        stockSubscription = new ArrayList<>();
-    }
+    }//default constructor
 
     /**
-     * takes in name and list of stocks to subscribe to
-     * @param name
-     * @param stockSubscription
+     * Overloaded constructor for the Agent
+     * @param name name of the agent
      */
-    Agent(String name, Bid latestBid, ArrayList<Stock> stockSubscription) {
+    Agent(String name) {
         this.nameOfAgent = name;
-        this.latestBid = latestBid;
-        this.stockSubscription = stockSubscription;
-    }
-
+    }//end overloaded constructor
 
     /**
      * takes in a bid whether its a buy or sale.
      * whenever trade is called, the trade becomes the latest bid.
      * @param bidInstance
      */
-    public void trade(Bid bidInstance){
-        latestBid = bidInstance;
-        currentAlert.alert(); //notify all subscribers about trade
-    }
-
-
-    /**
-     * agent is subscribed to a stock.
-     * getBid returns the change that occurred w/ stock.
-     */
-    public Bid update(Stock stock){
-        return stock.getBid();
-    }
-
+    public String trade(Stock stockInstance, int amountOfShares, TransactionType tType){
+        Bid newBid = new Bid(stockInstance,amountOfShares,tType);
+        return stockInstance.notifyObserver(newBid); //notify all subscribers about trade
+    }//end trade 
 
     @Override
     public String update(Bid newBid) {
-        return "";
+        return newBid.toString();
+    }//end update
+
+    /**
+     * getter method for the name of the agent
+     * @return name of the agent 
+     */
+    public String getName() {
+    	return nameOfAgent;
     }
 
-
+    
     @Override
     public String toString() {
         return "Agent - name: " +  nameOfAgent + " " + latestBid.toString();
-    }
-}
-
-//we have stocks, with subscribers.
-//whenevever a stock is bought/sold. Notify all subscribers
-//agents carry bids on these stocks and subscribe to the notifications of these stocks
-//
-//
+    }//end toString
+}//end class
