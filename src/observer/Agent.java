@@ -1,31 +1,48 @@
-package observer;
+package com.company;
+
 //CHANGES 5:10 PM WG
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Observable;
 
-public class Agent {
+public class Agent implements Observer{
     private String nameOfAgent;
     private Stock currentAlert;
+    private Bid latestBid;
+
     private ArrayList<Stock> stockSubscription;
 //name
     /**
      * default constructor
      */
     Agent(){
-    this.nameOfAgent = "N/A";
-    stockSubscription = new ArrayList<>();
+        this.nameOfAgent = "N/A";
+        stockSubscription = new ArrayList<>();
     }
 
     /**
      * takes in name and list of stocks to subscribe to
      * @param name
-     * @param stocksToSubscribe
+     * @param stockSubscription
      */
-    Agent(String name, Stock[] stocksToSubscribe) {
+    Agent(String name, Bid latestBid, ArrayList<Stock> stockSubscription) {
         this.nameOfAgent = name;
-        this.stockSubscription = (ArrayList<Stock>) Arrays.asList(stocksToSubscribe); //convert Array to Array List using type cast
+        this.latestBid = latestBid;
+        this.stockSubscription = stockSubscription;
     }
+
+
+    /**
+     * takes in a bid whether its a buy or sale.
+     * whenever trade is called, the trade becomes the latest bid.
+     * @param bidInstance
+     */
+    public void trade(Bid bidInstance){
+        latestBid = bidInstance;
+        currentAlert.alert(); //notify all subscribers about trade
+    }
+
+
     /**
      * agent is subscribed to a stock.
      * getBid returns the change that occurred w/ stock.
@@ -34,9 +51,16 @@ public class Agent {
         return stock.getBid();
     }
 
+
+    @Override
+    public String update(Bid newBid) {
+        return "";
+    }
+
+
     @Override
     public String toString() {
-        return nameOfAgent + " alerted to Bid- " + currentAlert.toString() + "";
+        return "Agent - name: " +  nameOfAgent + " " + latestBid.toString();
     }
 }
 

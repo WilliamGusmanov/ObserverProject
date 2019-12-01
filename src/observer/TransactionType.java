@@ -1,5 +1,5 @@
-package observer;
+package com.company;
 
 public enum TransactionType {
-    BUY,SELL
+    BUY,SELL;
 }

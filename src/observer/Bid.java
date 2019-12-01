@@ -1,4 +1,4 @@
-package observer;
+package com.company;
 
 import java.util.ArrayList;
 
@@ -13,10 +13,8 @@ public class Bid {
      * a reference to the current stock at bid
      */
     private Stock stockInstance;
-    private TransactionType tType;
     private int sharesAmount;
-
-
+    private TransactionType tType;
 
     /**
      * Aggregation: The two transaction types: BUY & SELL
@@ -27,16 +25,24 @@ public class Bid {
     Bid(){
         this.stockInstance = null;
         this.tType = TransactionType.BUY;
+        sharesAmount = 0;
     }
+
     /**
      * constructor
      * @param stockInstance
      * @param tType
      */
-    Bid(Stock stockInstance, TransactionType tType){
+    Bid(Stock stockInstance, int amountOfShares, TransactionType tType){
         this.stockInstance = stockInstance;
+        this.sharesAmount = amountOfShares;
         this.tType = tType;
     }
+
+    public double getTradePrice() {
+        return (sharesAmount * stockInstance.getPricePerStock());
+    }
+
 
     /**
      * - - - - change contents as per instruction - - - -
@@ -44,9 +50,18 @@ public class Bid {
      */
     @Override
     public String toString() {
-        return "Bid{" +
-                "stockInstance=" + stockInstance +
-                ", tType=" + tType +
-                '}';
+
+        String type = "";
+        if(tType == TransactionType.BUY){
+            type = "Buying ";
+        }
+        else{
+            type = "Selling ";
+        }
+
+        return "alerted to Bid- " +
+                stockInstance + " " +
+                type + sharesAmount +
+                " shares for the amount: $" + getTradePrice();
     }
 }

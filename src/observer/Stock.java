@@ -1,7 +1,8 @@
-package observer;
+package com.company;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Observable;
 
 //agents buy and sell stock
 //might need an agent class
@@ -10,20 +11,21 @@ import java.util.Arrays;
 //
 //implements Subject Observer
 //Only one stock at a time. it's static in this sort of way.
-public class Stock {
-    /**
-     * every stock has a symbol
-     */
+public class Stock implements Subject {
+
+    /** every stock has a symbol */
     String symbol;
 
-    /**
-     * list of bids
-     */
-    //ArrayList<Bid> listOfBids;
+    /** Bid for the stock */
+    private Bid latestBid;
 
-    Bid latestBid;
+    /** Amount per stock used to calculate total amount*/
+    private double pricePerStock;
 
+    /** list of subscribers to alert for all changes */
     ArrayList<Agent> subscribers;
+
+
     /**
      * default constructor
      */
@@ -31,13 +33,18 @@ public class Stock {
         symbol = "N/A";
         //listOfBids = new ArrayList(); //initialize list w/ constructor
         latestBid = null;
+        pricePerStock = 0.0;
         subscribers = new ArrayList();
     }
 
-    Stock(String symbol, Agent[] subscribers){
+    Stock(String symbol, double pricePerStock, ArrayList<Agent> subscribers){
         this.symbol = symbol;
-        this.subscribers = (ArrayList<Agent>)(Arrays.asList(subscribers));
-        latestBid = null;
+        this.pricePerStock = pricePerStock;
+        this.subscribers = subscribers;
+    }
+
+    public double getPricePerStock() {
+        return pricePerStock;
     }
     /**
      * alert all subscribers
@@ -46,16 +53,6 @@ public class Stock {
         for (Agent subscriber : subscribers) {
             subscriber.update(this);
         }
-    }
-
-    /**
-     * takes in a bid whether its a buy or sale.
-     * whenever trade is called, the trade becomes the latest bid.
-     * @param bidInstance
-     */
-    public void trade(Bid bidInstance){
-        latestBid = bidInstance;
-        alert(); //notify all subscribers about trade
     }
 
     /**
@@ -70,9 +67,26 @@ public class Stock {
     }
 
 
+    @Override
+    public void registerObserver(Observer o) {
+
+    }
+
+    @Override
+    public void removeObserver(Observer o) {
+
+    }
+
+    @Override
+    public void notifyObserver() {
+
+    }
+
+
     //return stock name, #of shares, #dollar amount for trade
     @Override
     public String toString() {
-        return super.toString();
+        return "Symbol: " + symbol;
     }
+
 }
